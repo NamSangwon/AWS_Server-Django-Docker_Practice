@@ -43,8 +43,12 @@
     + --module server_dev.wsgi == Django를 wsgi로 실행
   - uwsgi 커스텀 설정
     + etc 디렉토리에 uwsgi/sites/ 디렉토리 생성
-    + ![image](https://github.com/NamSangwon/AWS_Server_Practice/assets/127469500/8f60c94d-1411-4728-a661-3d3b252a0094)
     + `sudo vi AWS_Server_Prac` (/etc/uwsgi/sites/에 파일 작성) 
+    + ![image](https://github.com/NamSangwon/AWS_Server_Practice/assets/127469500/8f60c94d-1411-4728-a661-3d3b252a0094)
+    + `sudo mv AWS_Server_Practice AWS_Server_Practice.ini` (.ini로 파일명 변경)
+  - `uwsgi -i /etc/uwsgi/sites/AWS_Server_Prac.ini` (uwsgi 커스텀 설정 적용)
+    + `AWS_Server_Prac.ini` 파일은 **"#" 주석 처리 불가**이므로 **유의!**
+    + `ps -ef | grep uwsgi` (설정 적용 확인)
     + 
 
   
