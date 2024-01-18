@@ -41,7 +41,12 @@
   - `uwsgi --http :8000 --module server_dev.wsgi` -> 서버에서 Django 실행
     + -- http :8000 == 0.0.0.0:8000
     + --module server_dev.wsgi == Django를 wsgi로 실행
-  - 
+  - uwsgi 커스텀 설정
+    + etc 디렉토리에 uwsgi/sites/ 디렉토리 생성
+    + ![image](https://github.com/NamSangwon/AWS_Server_Practice/assets/127469500/8f60c94d-1411-4728-a661-3d3b252a0094)
+    + `sudo vi AWS_Server_Prac` (/etc/uwsgi/sites/에 파일 작성) 
+    + 
+
   
 * Nginx
   -
