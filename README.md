@@ -1,9 +1,9 @@
-![image](https://github.com/NamSangwon/AWS_Server_Practice/assets/127469500/8aa18486-c437-4e46-b54e-8f6a742551c3)# AWS_Server_Practice
+# AWS_Server_Practice
  
 ### 24/01/15 ~ 
 
-#### 강의 유튜브(https://www.youtube.com/playlist?list=PLHQvFs5CMVoQMcglHmtPz9ShY058H3veh)
-#### 강의 참고 블로그(https://cholol.tistory.com/482)
+#### [강의 유튜브](https://www.youtube.com/playlist?list=PLHQvFs5CMVoQMcglHmtPz9ShY058H3veh)
+#### [강의 참고 블로그](https://cholol.tistory.com/482)
 
 ---
 ### 1. 개발 환경 구성 1
