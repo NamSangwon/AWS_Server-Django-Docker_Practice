@@ -2,7 +2,8 @@
  
 ### 24/01/15 ~ 
 
-### https://www.youtube.com/playlist?list=PLHQvFs5CMVoQMcglHmtPz9ShY058H3veh
+#### 강의 유튜브(https://www.youtube.com/playlist?list=PLHQvFs5CMVoQMcglHmtPz9ShY058H3veh)
+#### 강의 참고 블로그(https://cholol.tistory.com/482)
 
 ---
 ### 1. 개발 환경 구성 1
@@ -33,7 +34,8 @@
 ### 2. 개발 환경 구성 2
 ![image](https://github.com/NamSangwon/AWS_Server_Practice/assets/127469500/94441b73-7c72-4e21-b219-10baa3d8bb2d)
 
-[pip를 이용하기 위해 가상 환경에서 진행 ('source venv/bin/activate')]
+[pip를 이용하기 위해 가상 환경에서 진행 (`source venv/bin/activate`)]
+
 * uwsgi
   - wsgi(Web Server Gateway Interface) == 웹서버와 웹 프레임워크 사이에 통신을 담당하는 인터페이스
   - `pip install uwsgi` (uwsgi 설치)
