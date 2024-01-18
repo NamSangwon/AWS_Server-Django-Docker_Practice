@@ -53,8 +53,8 @@
     + ***/tmp/ 디렉토리에서 `tail -f uwsgi.log`을 통해 로그 찍기***
   
 * Nginx
-  - `sudo apt-get install nginx` (nginx 설치) `&rightarrow;` 설치 시 기본 디렉토리 생성됨
-  - `/etc/nginx/nginx/nginx.conf` `&rightarrow;` **[nginx의 config](https://cholol.tistory.com/485)는 서버 개발 역량에 필수이므로 확인 요망!!**
+  - `sudo apt-get install nginx` (nginx 설치) &rightarrow; 설치 시 기본 디렉토리 생성됨
+  - `/etc/nginx/nginx/nginx.conf` &rightarrow; **[nginx의 config](https://cholol.tistory.com/485)는 서버 개발 역량에 필수이므로 확인 요망!!**
   
 * MySQL
   -
