@@ -67,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'AWS_Server_Practice.wsgi.application'
+WSGI_APPLICATION = 'AWS_Server_Prac.wsgi.application'
 
 
 # Database
