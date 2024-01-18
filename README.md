@@ -35,7 +35,7 @@
 
 [pip를 이용하기 위해 가상 환경에서 진행 (`source venv/bin/activate`)]
 
-* uwsgi
+* uwsgi (+ socket)
   - wsgi(Web Server Gateway Interface) == 웹서버와 웹 프레임워크 사이에 통신을 담당하는 인터페이스
   - `pip install uwsgi` (uwsgi 설치)
   - `uwsgi --http :8000 --module server_dev.wsgi` -> 서버에서 Django 실행
@@ -49,11 +49,13 @@
   - `uwsgi -i /etc/uwsgi/sites/AWS_Server_Prac.ini` (uwsgi 커스텀 설정 적용)
     + `AWS_Server_Prac.ini` 파일은 **# 주석 처리 불가**이므로 **유의!**
     + `ps -ef | grep uwsgi` (설정 적용 확인)
-    + 
-
+    + `uwsgi -i /etc/uwsgi/sites/AWS_Server_Prac.ini -http :8000`으로 **config파일을 이용해서 uwsgi를 실행**
+    + ***/tmp/ 디렉토리에서 `tail -f uwsgi.log`을 통해 로그 찍기***
   
 * Nginx
-  -
+  - `sudo apt-get install nginx` (nginx 설치)
+    + 설치 시 기본 디렉토리 생성됨
+  - '/etc/nginx/nginx/nginx.conf' -> **[nginx의 config](https://cholol.tistory.com/485)는 서버 개발 역량에 필수이므로 확인 요망!!**
   
 * MySQL
   -
