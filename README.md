@@ -33,7 +33,8 @@
 ### 2. 개발 환경 구성 2
 ![image](https://github.com/NamSangwon/AWS_Server_Practice/assets/127469500/94441b73-7c72-4e21-b219-10baa3d8bb2d)
 
-[pip를 이용하기 위해 가상 환경에서 진행 (`source venv/bin/activate`)]
+#### [pip를 이용하기 위해 가상 환경에서 진행 (`source venv/bin/activate`)]
+#### `ps -ef | grep (프로그램명)` &rightarrow; 설정 적용 확인
 
 * uwsgi (+ socket)
   - wsgi(Web Server Gateway Interface) == 웹서버와 웹 프레임워크 사이에 통신을 담당하는 인터페이스
@@ -48,13 +49,18 @@
     + `sudo mv AWS_Server_Practice AWS_Server_Practice.ini` (.ini로 파일명 변경)
   - `uwsgi -i /etc/uwsgi/sites/AWS_Server_Prac.ini` (uwsgi 커스텀 설정 적용)
     + `AWS_Server_Prac.ini` 파일은 **# 주석 처리 불가**이므로 **유의!**
-    + `ps -ef | grep uwsgi` (설정 적용 확인)
     + `uwsgi -i /etc/uwsgi/sites/AWS_Server_Prac.ini -http :8000`으로 **config파일을 이용해서 uwsgi를 실행**
     + ***/tmp/ 디렉토리에서 `tail -f uwsgi.log`을 통해 로그 찍기***
   
 * Nginx
   - `sudo apt-get install nginx` (nginx 설치) &rightarrow; 설치 시 기본 디렉토리 생성됨
-  - `/etc/nginx/nginx/nginx.conf` &rightarrow; **[nginx의 config](https://cholol.tistory.com/485)는 서버 개발 역량에 필수이므로 확인 요망!!**
+  - `/etc/nginx/nginx/nginx.conf` &rightarrow; ***[nginx의 config](https://cholol.tistory.com/485)는 서버 개발 역량에 필수이므로 확인 요망!!***
+  - `/etc/nginx/sites-enabled/default` 에서 실질적인 설정을 조정함 &rightarrow; 포트 번호를 80에서 8080으로 변경함
+  - nginx의 virtual host config로 config파일 생성
+  - ![image](https://github.com/NamSangwon/AWS_Server_Practice/assets/127469500/eadd8972-b0ca-49b5-a3a8-dfa180fd4e74)
+  - ### nginx 가동 &rightarrow; /etc/nginx/nginx.conf에서 /etc/nginx/sites-enables/AWS_Server_Practice를 읽어서 80(http) 포트번호로 들어오는 요청을 uwsgi로 전송
+  - ***`sudo systemctl start nginx`으로 nginx 실행***
+    + AWS 인스턴스에 인바운드 규칙(HTTP, HTTPS, etc.) 추가
   
 * MySQL
   -
