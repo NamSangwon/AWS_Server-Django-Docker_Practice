@@ -5,6 +5,7 @@
 #### :video_camera: [강의 유튜브](https://www.youtube.com/playlist?list=PLHQvFs5CMVoQMcglHmtPz9ShY058H3veh)    &    :page_facing_up: [강의 참고 블로그](https://cholol.tistory.com/482)
 
 ---
+
 ### 1. 개발 환경 구성 1
 * AWS 서버 생성
   - 플랫폼 : Linux
@@ -29,7 +30,9 @@
     + [로컬 환경] `pip freeze > requirements.txt` (로컬 환경에서 사용된 모듈들을 txt 파일로 내보내기)
     + github에 commit & push
     + [서버 환경] pull -> `pip install -r requirements.txt` (필요 모듈을 서버 환경에 추가)
+    + 
 ---
+
 ### 2. 개발 환경 구성 2
 ![image](https://github.com/NamSangwon/AWS_Server_Practice/assets/127469500/94441b73-7c72-4e21-b219-10baa3d8bb2d)
 
@@ -61,6 +64,7 @@
   - ### nginx 가동 &rightarrow; /etc/nginx/nginx.conf에서 /etc/nginx/sites-enables/AWS_Server_Practice를 읽어서 80(http) 포트번호로 들어오는 요청을 uwsgi로 전송
   - ***`sudo systemctl start nginx`으로 nginx 실행***
     + AWS 인스턴스에 인바운드 규칙(HTTP, HTTPS, etc.) 추가
-  
-* MySQL
-  -
+
+---
+
+
