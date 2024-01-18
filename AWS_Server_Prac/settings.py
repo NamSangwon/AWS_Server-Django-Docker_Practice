@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'AWS_Server_Practice.urls'
+ROOT_URLCONF = 'AWS_Server_Prac.urls'
 
 TEMPLATES = [
     {
