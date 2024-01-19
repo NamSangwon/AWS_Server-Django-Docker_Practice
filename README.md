@@ -120,7 +120,7 @@
  
 * docker-compose 구성
   - 여러 개의 docker 이미지를 한 번에 관리하는 툴인 docker-compose 설치
-    +`sudo curl -L https://github.com/docker/compose/releases/download/1.25.0-rc2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose`
+    + `sudo curl -L https://github.com/docker/compose/releases/download/1.25.0-rc2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose`
     + `sudo chmod +x /usr/local/bin/docker-compose` (실행 권한 주기)
 
   - 환경 관리 파일 docker-compose.yml 작성
@@ -129,4 +129,5 @@
 
   - `docker-compose up -d --build` (up == docker-compose를 실행 &rightarrow; 실행 시 빌드하여 django & nginx의 docker image 생성 및 실행)
 
-  -  ***`./nginx/nginx-app.conf`의 upstream uwsgi 내의 server를 unix:/srv/docker-server/django.sock &rightarrow; unix:/srv/docker-server/django.sock 변경 必 (./AWS_Server_Prac/django.sock과 ./nginx/nginx-app.conf 내의 server의 .sock를 일치시켜야 함)***
+  -  ***`./nginx/nginx-app.conf`의 upstream uwsgi 내의 server를 unix:/srv/docker-server/django.sock
+ &rightarrow; unix:/srv/docker-server/django.sock 변경 必 (./AWS_Server_Prac/django.sock과 ./nginx/nginx-app.conf 내의 server의 .sock를 일치시켜야 함)***
