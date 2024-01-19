@@ -128,6 +128,9 @@
     +  ![image](https://github.com/NamSangwon/AWS_Server_Practice/assets/127469500/8ee9d92e-7987-4514-938e-7efe764c4d68)
 
   - `docker-compose up -d --build` (up == docker-compose를 실행 &rightarrow; 실행 시 빌드하여 django & nginx의 docker image 생성 및 실행)
+    
+  - 실행 == `docker-compose up` & 종료 == `docker-compose down`
+    + django의 소스 파일만을 업데이트 시 `./AWS_Server_Prac/` 내에서 git을 pull하고 docker-compose를 재실행 해주면 됨
 
   -  ***`./nginx/nginx-app.conf`의 upstream uwsgi 내의 server를 unix:/srv/docker-server/django.sock
  &rightarrow; unix:/srv/docker-server/django.sock 변경 必 (./AWS_Server_Prac/django.sock과 ./nginx/nginx-app.conf 내의 server의 .sock를 일치시켜야 함)***
