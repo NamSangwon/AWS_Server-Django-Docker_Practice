@@ -115,6 +115,8 @@
    
   - **nginx 설정** 
     + nginx.conf & nginx-app.conf & Dockerfile 추가 ([참고](https://cholol.tistory.com/489))
+      - ***`./nginx/nginx-app.conf`의 upstream uwsgi 내의 server를 unix:/srv/docker-server/django.sock
+ &rightarrow; unix:/srv/docker-server/django.sock 변경 必 (./AWS_Server_Prac/django.sock과 ./nginx/nginx-app.conf 내의 server의 .sock를 일치시켜야 함)***
     + `docker build -t docker-server/nginx .` (docker 빌드하기)
     + `docker run -p 80:80 docker-server/nginx` (nginx docker 실행하기)
  
@@ -132,5 +134,6 @@
   - 실행 == `docker-compose up` & 종료 == `docker-compose down`
     + django의 소스 파일만을 업데이트 시 `./AWS_Server_Prac/` 내에서 git을 pull하고 docker-compose를 재실행 해주면 됨
 
-  -  ***`./nginx/nginx-app.conf`의 upstream uwsgi 내의 server를 unix:/srv/docker-server/django.sock
- &rightarrow; unix:/srv/docker-server/django.sock 변경 必 (./AWS_Server_Prac/django.sock과 ./nginx/nginx-app.conf 내의 server의 .sock를 일치시켜야 함)***
+---
+
+### 4. 
