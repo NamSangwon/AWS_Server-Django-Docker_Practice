@@ -6,6 +6,11 @@
 
 ---
 
+## 서버 개발자가 하는 일
+1. API(= TR or RPC) 만들기
+2. 배치 만들기
+3. DB 테이블 만들기
+
 ### 1. 개발 환경 구성 1
 * AWS 서버 생성
   - 플랫폼 : Linux
@@ -136,4 +141,49 @@
 
 ---
 
-### 4. 
+### 4. API 구성
+
+* Docker에 MySQL 띄우기
+  - `docker-server` 디렉토리와 같은 위치에 `mkdir mysql` (*docker-server내에 DB를 생성하면 docker 종료 시 DB가 모두 날라가기 때문*)
+    
+  - `docker-server` 디렉토리와 같은 위치에 `mkdir scripts` (쉘 및 배치 프로그램 저장할 용도로 생성)
+    + `scripts` 디렉토리 내에 `mysql-docker.sh` 생성 (mysql 실행 스크립트 파일)
+    + ![image](https://github.com/NamSangwon/AWS_Server_Practice/assets/127469500/c2486c12-ed77-4b48-87a2-81b1d49e1554)
+    + `chmod +x mysql-docker.sh`로 스크립트 파일을 실행 파일로 변경 &rightarrow; `./mysql-docker.sh`로 바로 실행 가능
+
+  - *AWS 서버 내에서 DB를 사용하기 위해 **3306 포트** 권한 설정*
+ 
+  - Django 프로젝트의 사용 DB 변경
+    + Django 프로젝트의 setting.py 내의 설정 변경 (DATABASE & INSTALLED_APPS)
+      - INSTALLED_APPS에 rest_framework 추가
+      - DATABASE를 sqlite에서 mysql로 설정 변경
+      ```python
+      # Database (in setting.py)
+      DATABASES = {
+          'default': {
+             'ENGINE': 'django.db.backends.mysql',
+             'HOST': '43.201.60.58',
+             'NAME': 'AWS_Server_Prac',
+             'USER': 'root',
+             'PASSWORD': 'admin123!',
+             'PORT': '3306',
+             'OPTIONS': {'charset': 'utf8mb4'},
+         }
+      }
+      ```
+    + `pip install mysqlclient` (setting.py를 위와 같이 변경시키기 위해 필요한 모듈 설치)
+    + `python manage.py makemigrations` & `python manage.py migration` (migrate 진행 &rightarrow; django에서 기본으로 제공하는 테이블 생성)
+      - MYSQL과 Django 간의 버전 오류 발생 &rightarrow; ***Django의 버전을 3.2.23으로 다운그레이드로 해결*** [참고](https://stackoverflow.com/questions/75986754/django-db-utils-notsupportederror-mysql-8-or-later-is-required-found-5-7-33)
+ 
+  - ***로컬에서 Django를 띄워도 setting.py 내의 DATABASE 설정에 의해 AWS EC2 내의 MySQL DB를 보게 됨***
+
+* Django & DRF(Django Restful-Framework)를 통한 API 구현
+  - **`pip install djangorestframework` (DRF 설치)**
+ 
+  - `python manage.py startapp login` (로그인 앱 생성) [[영상](https://www.youtube.com/watch?v=NCRFC5lo8WA&list=PLHQvFs5CMVoQMcglHmtPz9ShY058H3veh&index=10) 및 [블로그](https://cholol.tistory.com/497) 구현 참고!]
+    + ***setting.py의 INSTALLED_APPS에 해당 앱 추가 필요***
+    + models.py 구성 (DB 테이블 구성) &rightarrow; `python manage.py makemigrations` & `python manage.py migrate`를 통해 DB 업데이트 (LoginUser 테이블 추가)
+    + views.py (api call 구성)
+    + urls.py (url 구성) (**AWS_Server_Prac/urls.py와 include를 통해 연결 必**)
+
+---
