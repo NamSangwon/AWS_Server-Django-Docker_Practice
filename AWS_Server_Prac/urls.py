@@ -19,5 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', include('login.urls')) # localhost/login/~~~ (~~~ = login 디렉토리 내의 urls.py 중 하나)
+    path('login/', include('login.urls')), # localhost/login/~~~ (~~~ = login 디렉토리 내의 urls.py 중 하나)
+    path('todo/', include('todo.urls'))
 ]
