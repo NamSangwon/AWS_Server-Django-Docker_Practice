@@ -102,7 +102,7 @@
     + ![image](https://github.com/NamSangwon/AWS_Server_Practice/assets/127469500/26beb411-6140-4e5c-94c0-37aacbb18c0a)
       
   - `docker build -t aws_server_prac/django .` (django의 docker 빌드하기 **경로명은 반드시 소문자로!!**)
-    + `apt-get update`에서의 **에러** 발생 &rightarrow; `RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list`의 명령어를 추가하여 해결 ([참고](https://www.sysnet.pe.kr/2/0/13331))
+    + `apt-get update`에서의 **에러** 발생 &rightarrow; `RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list`의 명령어를 추가하여 해결 [[참고](https://www.sysnet.pe.kr/2/0/13331)]
     + `RUN pip install -r requirements.txt`에서의 **에러** 발생 &rightarrow; requirements.txt 내의 django와 asgief의 버전을 다운그레이드하여 해결
     + `docker image ls` (docker 이미지 확인)
       
@@ -119,7 +119,7 @@
     + ![image](https://github.com/NamSangwon/AWS_Server_Practice/assets/127469500/419b1216-62f7-4949-8ecb-784b8b9ac1e4)
    
   - **nginx 설정** 
-    + nginx.conf & nginx-app.conf & Dockerfile 추가 ([참고](https://cholol.tistory.com/489))
+    + nginx.conf & nginx-app.conf & Dockerfile 추가 [[참고](https://cholol.tistory.com/489)]
       - ***`./nginx/nginx-app.conf`의 upstream uwsgi 내의 server를 unix:/srv/docker-server/django.sock
  &rightarrow; unix:/srv/docker-server/django.sock 변경 必 (./AWS_Server_Prac/django.sock과 ./nginx/nginx-app.conf 내의 server의 .sock를 일치시켜야 함)***
     + `docker build -t docker-server/nginx .` (docker 빌드하기)
@@ -141,7 +141,7 @@
 
 ---
 
-### 4. API 구성
+### 4. API 구성 1
 
 * Docker에 MySQL 띄우기
   - `docker-server` 디렉토리와 같은 위치에 `mkdir mysql` (*docker-server내에 DB를 생성하면 docker 종료 시 DB가 모두 날라가기 때문*)
@@ -173,7 +173,7 @@
       ```
     + `pip install mysqlclient` (setting.py를 위와 같이 변경시키기 위해 필요한 모듈 설치)
     + `python manage.py makemigrations` & `python manage.py migration` (migrate 진행 &rightarrow; django에서 기본으로 제공하는 테이블 생성)
-      - MYSQL과 Django 간의 버전 오류 발생 &rightarrow; ***Django의 버전을 3.2.23으로 다운그레이드로 해결*** [참고](https://stackoverflow.com/questions/75986754/django-db-utils-notsupportederror-mysql-8-or-later-is-required-found-5-7-33)
+      - MYSQL과 Django 간의 버전 오류 발생 &rightarrow; ***Django의 버전을 3.2.23으로 다운그레이드로 해결*** [[참고](https://stackoverflow.com/questions/75986754/django-db-utils-notsupportederror-mysql-8-or-later-is-required-found-5-7-33)]
  
   - ***로컬에서 Django를 띄워도 setting.py 내의 DATABASE 설정에 의해 AWS EC2 내의 MySQL DB를 보게 됨***
 
@@ -185,5 +185,21 @@
     + models.py 구성 (DB 테이블 구성) &rightarrow; `python manage.py makemigrations` & `python manage.py migrate`를 통해 DB 업데이트 (LoginUser 테이블 추가)
     + views.py (api call 구성)
     + urls.py (url 구성) (**AWS_Server_Prac/urls.py와 include를 통해 연결 必**)
+
+---
+
+### 4. API 구성 2
+
+* Serialization (직렬화)
+  - 다수의 데이터를 입력 받을 시 `user_id = request.data.get('user_id')`와 같은 코드를 통해 입력 받기 힘들기 때문에 Serialization을 사용하여 해결
+ 
+  - 입력 받은 데이터(ex. 코드 내의 객체, 해시, 딕셔너리 등)를 JSON의 데이터를 자동으로 변환
+    + `serialize.py` 파일 생성 후 *데이터 직렬화 시키는 코드* 작성
+    + `serializer = LoginUserSerializer(request.data)`를 통해 serializer를 사용하여 `views.py`에 적용
+    + ***[자세한 실습 사항은 github에 commit된 내용 및 강의 블로그와 영상을 참고!!]***
+    + 역직렬화 : 반대로 Json 데이터를 객체, 해시, 딕셔너리 등으로 변환
+
+* todo앱 만들기
+  - Django 구성을 위주로 진행할 예정이기 때문에 *강의 블로그 및 영상* 참고!!
 
 ---
