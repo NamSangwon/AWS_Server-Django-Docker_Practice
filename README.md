@@ -203,3 +203,8 @@
   - Django 구성을 위주로 진행할 예정이기 때문에 *강의 블로그 및 영상* 참고!!
 
 ---
+
+### 5. Todo-List 구성 
+
+***Todo-List의 프론트엔드는 [해당 github 링크](https://github.com/tkdlek11112/todo-list)을 docker에 띄워서 실습을 진행!! (3000번 포트에서 3001번 포트로 docker에 전송)***
+
