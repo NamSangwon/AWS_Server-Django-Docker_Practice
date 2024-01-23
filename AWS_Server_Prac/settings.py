@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'AWS_Server_Prac.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': '43.201.60.58',
+        'HOST': '3.39.235.216',
         'NAME': 'AWS_Server_Prac',
         'USER': 'root',
         'PASSWORD': 'admin123!',
