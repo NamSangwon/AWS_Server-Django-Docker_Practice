@@ -3,24 +3,34 @@ from .models import Task
 from rest_framework.response import Response
 from datetime import datetime
 from django.shortcuts import render
+from common.common import TodoView, SuccessResponse, SuccessResponseWithData, CommonResponse, ErrorResponse
 
 # Create your views here.
 
 ################################## 실습 코드 ##################################
-class TaskSelect(APIView):
+class TaskSelect(TodoView): # -> APIView를 상속하여 TaskSelect 클래스 생성
     def post(self, request):
-        user_id = request.data.get('user_id')
+
+        # 이전 버전 (body 부에 user_id를 받아 오는 버전)
+        if self.user_id is False:
+            user_id = request.data.get('user_id')
+        # 현재 버전 (headers 부에 user_id를 받아 오는 버전)
+        else: 
+            user_id = self.user_id
+
         page_number = request.data.get('page_number')
 
         # Task 조회 처리
-        if user_id and not "":
+        if user_id == "" or user_id is None:
+            tasks = []
+        elif user_id:
             tasks = Task.objects.filter(user_id=user_id) # 해당 아이디에 해당하는 Task 조회
         else:
             tasks = Task.objects.all() # 모든 Task 조회
 
         # 페이징 처리 (한 페이지의 Task 수 = 10)
         is_last_page = True # 마지막 페이지 = 다음 페이지 없음
-        if page_number is not None and page_number >= 0:
+        if page_number is not None and page_number >= 0 and len(tasks) > 0:
             # 페이지 개수가 1개일 때의 마지막 페이지
             if tasks.count() <= 10:
                 pass
@@ -46,11 +56,22 @@ class TaskSelect(APIView):
                                 userId=task.user_id,
                                 done=task.state))
 
-        return Response(status=200, data=dict(tasks=tasks_list, isLastPage=is_last_page))
+        # (이전 버전도 정상적으로 작동할 수 있게 if문을 통해 version 분기))
+        if self.version >= "1.1":
+            return SuccessResponseWithData(dict(tasks=tasks_list, isLastPage=is_last_page))
+        else:
+            return Response(status=200, data=dict(tasks=tasks_list, isLastPage=is_last_page))
     
-class TaskCreate(APIView):
+class TaskCreate(TodoView):
     def post(self, request):
-        user_id = request.data.get('user_id')
+        
+        # 이전 버전 (body 부에 user_id를 받아 오는 버전)
+        if self.user_id is None:
+            user_id = request.data.get('user_id')
+        # 현재 버전 (headers 부에 user_id를 받아 오는 버전)
+        else: 
+            user_id = self.user_id
+
         todo_id = request.data.get('todo_id')
         name = request.data.get('name')
         
@@ -62,7 +83,11 @@ class TaskCreate(APIView):
 
         # 사용자 편의를 위해 프론트엔드는 성공 여부를 기다리지 않고 바로 처리(ex. 현 실습에서의 Todo 리스트 목록 업데이트) 한 후 
         # 백엔드에서 응답이 오면 사후 검증을 진행하도록 함 -> 따라서 해당 데이터를 반환하여 비교하여 검증하도록 함
-        return Response(data=dict(id=task.id)) 
+        # (이전 버전도 정상적으로 작동할 수 있게 if문을 통해 version 분기))
+        if self.version >= "1.1":
+            return SuccessResponseWithData(dict(id=task.id))
+        else:
+            return Response(data=dict(id=task.id))
     
 class TaskDelete(APIView):
     def post(self, request):
