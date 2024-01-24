@@ -201,12 +201,14 @@
     + ***[자세한 실습 사항은 github에 commit된 내용 및 강의 블로그와 영상을 참고!!]***
     + 역직렬화 : 반대로 Json 데이터를 객체, 해시, 딕셔너리 등으로 변환
 
-* todo앱 만들기
-  - Django 구성을 위주로 진행할 예정이기 때문에 *강의 블로그 및 영상* 참고!!
-
 ---
 
-### 5. Todo-List 구성 
+### 5. Todo-List 앱 구성 
 
+**Django 구성을 위주로 진행할 예정이기 때문에 *강의 블로그 및 영상* 참고!!**
 ***Todo-List의 프론트엔드는 [해당 github 링크](https://github.com/tkdlek11112/todo-list)을 docker에 띄워서 실습을 진행!! (3000번 포트에서 3001번 포트로 docker에 전송)***
 
+1. Login & Regist 구현
+2. Todo Task (Create & Select & Delete & Toggle) 구현
+3. 페이징 처리
+4. 
