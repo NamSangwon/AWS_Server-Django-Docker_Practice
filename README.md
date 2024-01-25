@@ -35,14 +35,14 @@
     + [로컬 환경] `pip freeze > requirements.txt` (로컬 환경에서 사용된 모듈들을 txt 파일로 내보내기)
     + github에 commit & push
     + [서버 환경] pull -> `pip install -r requirements.txt` (필요 모듈을 서버 환경에 추가)
-    + 
+      
 ---
 
 ### 2. 개발 환경 구성 2
 ![image](https://github.com/NamSangwon/AWS_Server_Practice/assets/127469500/94441b73-7c72-4e21-b219-10baa3d8bb2d)
 
-#### [pip를 이용하기 위해 가상 환경에서 진행 (`source venv/bin/activate`)]
-#### `ps -ef | grep (프로그램명)` &rightarrow; 설정 적용 확인
+#### [pip를 이용하기 위해 가상 환경에서 진행 (`source venv/bin/activate`)] 
+#### `ps -ef | grep (프로그램명)` &rightarrow; 설정 적용 확인 
 
 * uwsgi (+ socket)
   - wsgi(Web Server Gateway Interface) == 웹서버와 웹 프레임워크 사이에 통신을 담당하는 인터페이스
@@ -84,9 +84,9 @@
 
 ### 3. Docker로 서버 띄우기
 
-**micro service architecture(MSA) = 각각의 기능별로 서버를 쪼개는 개념**
-**docker가 등장 &rightarrow; 컨테이너로 서버를 운영/배포/관리가 쉬워짐**
-***해당 실습에서는 Django와 nginx를 각각의 Docker로 여는 것이 목표!!***
+**micro service architecture(MSA) = 각각의 기능별로 서버를 쪼개는 개념** <br/>
+**docker가 등장 &rightarrow; 컨테이너로 서버를 운영/배포/관리가 쉬워짐** <br/>
+***해당 실습에서는 Django와 nginx를 각각의 Docker로 여는 것이 목표!!*** <br/>
 
 * Docker 설치
   - `curl -fsSL https://get.docker.com/ | sudo sh` (docker 설치)
@@ -205,10 +205,15 @@
 
 ### 5. Todo-List 앱 구성 
 
-**Django 구성을 위주로 진행할 예정이기 때문에 *강의 블로그 및 영상* 참고!!**
+**Django 구성을 위주로 진행할 예정이기 때문에 *강의 블로그 및 영상* 참고!!** <br/>
 ***Todo-List의 프론트엔드는 [해당 github 링크](https://github.com/tkdlek11112/todo-list)을 docker에 띄워서 실습을 진행!! (3000번 포트에서 3001번 포트로 docker에 전송)***
 
 1. Login & Regist 구현
 2. Todo Task (Create & Select & Delete & Toggle) 구현
 3. 페이징 처리
-4. 
+4. 공통 영역 추가 (함수와 비슷하게 공통 패키지에 구현하여 재사용성을 높이도록 하는 방법)
+   - body 부로 넘기던 *user_id*를 *version*와 함께 headers로 넘기도록 수정 (공통 영역 TodoView 내에서 입력 받기)
+   - `Access to XMLHttpRequest at 'http://localhost:8000/todo/select' from origin 'http://localhost:3001' has been blocked by CORS policy: Request header field version is not allowed by Access-Control-Allow-Headers in preflight response.` 에러 발생 &rightarrow; `setting.py`를 수정하여 오류 해결 [[수정 사항](https://github.com/NamSangwon/AWS_Server_Practice/commit/eb7a6a4a1a27bbeb42648b954ad1cac4634016af)]
+   - 각 API의 출력을 공통 포맷으로 수정
+
+ 
