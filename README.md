@@ -260,3 +260,33 @@
 
 --- 
 
+### 7. 배치 프로그램
+
+* ***배치(batch) 프로그램 = 일괄적으로 처리하는 프로그램***
+
+* 배치라는걸 만드는 것보다 배치를 **언제 써야하는가**가 중요함
+
+* *알고리즘을 적용하여 배치 프로그램을 최적화*
+
+* Django에서 제공하는 배치 프로그램 생성
+  - 해당 프로젝트에서는 `./common/management/commands/(command 파일명)` 파일에 배치 프로그램 생성
+  - `python manage.py (배치 파일명)`으로 배치 프로그램 실행 (*동일한 명령어로 작동하는 makemigrations, migrate와 runserver도 모두 commands이다.*)
+  - ```
+    # 실습 배치 프로그램
+    from django.core.management.base import BaseCommand # Django에서 제공하는 Command 클래스
+    from todo.models import Task
+    from datetime import datetime
+    
+    # 오늘 날짜 이전에 생성한 Task들의 state를 update
+    class Command(BaseCommand):
+        def handle(self, *args, **options):
+            task_list = Task.objects.all()
+    
+            for task in task_list:
+                if task.end_date < datetime.now().date():
+                    task.state = 3
+                    task.save()
+                    print(task.id, task.name, "만료되었습니다.", task.end_date)
+    ```
+    - 배치 프로그램은 보통 *특정 시간* 혹은 *특정 조건*에 작동 &rightarrow; 스케쥴러 역할로 제공하는 크론탭(in Linux) or Jenkins 사용
+      * Jenkins는 배치 프로그램의 종료를 특정 조건으로 사용할 수 있기 때문에 더 유용하게 사용 가능
