@@ -143,3 +143,34 @@ CORS_ALLOW_HEADERS = [
     'content-type',
     'accept',
 ]
+
+# 로그를 찍을 시 logs 디렉토리 내의 파일에 작성
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': { # 로그 포맷 구성
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs') + "/log",
+            'formatter':'verbose', # 로그 포맷 받기
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'INFO', # Error 이상의 log를 파일에 작성
+            'propagate': True,
+        },
+    },
+}
