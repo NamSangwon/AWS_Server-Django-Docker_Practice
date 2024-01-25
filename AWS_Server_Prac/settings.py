@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'login',
-    'todo'
+    'todo',
+    'common',
 ]
 
 MIDDLEWARE = [
@@ -160,7 +161,7 @@ LOGGING = {
     },
     'handlers': {
         'file': {
-            'level': 'INFO',
+            'level': 'ERROR',
             'class': 'logging.FileHandler',
             'filename': os.path.join(BASE_DIR, 'logs') + "/log",
             'formatter':'verbose', # 로그 포맷 받기
@@ -169,7 +170,7 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['file'],
-            'level': 'INFO', # Error 이상의 log를 파일에 작성
+            'level': 'ERROR', # Error 이상의 log를 파일에 작성
             'propagate': True,
         },
     },

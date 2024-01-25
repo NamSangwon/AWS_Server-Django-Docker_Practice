@@ -79,5 +79,4 @@ INFO 2024-01-25 18:51:06,182 views 14788 19420 Test API End!!
 ERROR 2024-01-25 18:51:06,182 views 14788 19420 Occured Error, user_id = asd
 WARNING 2024-01-25 18:51:06,182 views 14788 19420 [Warning!!] user_id = asd
 INFO 2024-01-25 18:51:06,183 basehttp 14788 19420 "POST /todo/test HTTP/1.1" 200 112
-INFO 2024-01-25 18:52:32,620 autoreload 14788 376 C:\Users\nsw32\vscode\AWS_Server_Practice\AWS_Server_Prac\settings.py changed, reloading.
-INFO 2024-01-25 18:52:33,222 autoreload 18900 10624 Watching for file changes with StatReloader
+
