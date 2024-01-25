@@ -1,0 +1,83 @@
+Occured Errorasd
+Occured Error, user_id = asd
+Occured Error, user_id = asd
+Occured Error, user_id = asd
+Occured Error, user_id = asd
+Watching for file changes with StatReloader
+C:\Users\nsw32\vscode\AWS_Server_Practice\todo\views.py changed, reloading.
+Watching for file changes with StatReloader
+Test API Start!!
+input_value1 = 1
+input_value2 = 2
+input_value3 = 3
+Test API End!!
+Occured Error, user_id = asd
+[Warning!!] user_id = asd
+"POST /todo/test HTTP/1.1" 200 40
+C:\Users\nsw32\vscode\AWS_Server_Practice\todo\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\nsw32\vscode\AWS_Server_Practice\todo\views.py changed, reloading.
+Watching for file changes with StatReloader
+Test API Start!!
+input_value1 = 1
+input_value2 = 2
+input_value3 = 3
+output_value1 = 12
+output_value2 = 23
+output_value3 = 31
+Test API End!!
+Occured Error, user_id = asd
+[Warning!!] user_id = asd
+"POST /todo/test HTTP/1.1" 200 112
+C:\Users\nsw32\vscode\AWS_Server_Practice\todo\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\Users\nsw32\vscode\AWS_Server_Practice\AWS_Server_Prac\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Test API Start!!
+input_value1 = 1
+input_value2 = 2
+input_value3 = 3
+output_value1 = 12
+output_value2 = 23
+output_value3 = 31
+Test API End!!
+Occured Error, user_id = asd
+[Warning!!] user_id = asd
+"POST /todo/test HTTP/1.1" 200 112
+C:\Users\nsw32\vscode\AWS_Server_Practice\AWS_Server_Prac\settings.py changed, reloading.
+INFO 2024-01-25 18:51:02,790 autoreload 14788 376 Watching for file changes with StatReloader
+INFO 2024-01-25 18:51:05,891 views 14788 18292 Test API Start!!
+INFO 2024-01-25 18:51:05,891 views 14788 18292 input_value1 = 1
+INFO 2024-01-25 18:51:05,891 views 14788 18292 input_value2 = 2
+INFO 2024-01-25 18:51:05,891 views 14788 18292 input_value3 = 3
+INFO 2024-01-25 18:51:05,891 views 14788 18292 output_value1 = 12
+INFO 2024-01-25 18:51:05,891 views 14788 18292 output_value2 = 23
+INFO 2024-01-25 18:51:05,892 views 14788 18292 output_value3 = 31
+INFO 2024-01-25 18:51:05,892 views 14788 18292 Test API End!!
+ERROR 2024-01-25 18:51:05,892 views 14788 18292 Occured Error, user_id = asd
+WARNING 2024-01-25 18:51:05,892 views 14788 18292 [Warning!!] user_id = asd
+INFO 2024-01-25 18:51:05,892 basehttp 14788 18292 "POST /todo/test HTTP/1.1" 200 112
+INFO 2024-01-25 18:51:06,036 views 14788 1692 Test API Start!!
+INFO 2024-01-25 18:51:06,037 views 14788 1692 input_value1 = 1
+INFO 2024-01-25 18:51:06,037 views 14788 1692 input_value2 = 2
+INFO 2024-01-25 18:51:06,037 views 14788 1692 input_value3 = 3
+INFO 2024-01-25 18:51:06,037 views 14788 1692 output_value1 = 12
+INFO 2024-01-25 18:51:06,037 views 14788 1692 output_value2 = 23
+INFO 2024-01-25 18:51:06,037 views 14788 1692 output_value3 = 31
+INFO 2024-01-25 18:51:06,037 views 14788 1692 Test API End!!
+ERROR 2024-01-25 18:51:06,037 views 14788 1692 Occured Error, user_id = asd
+WARNING 2024-01-25 18:51:06,037 views 14788 1692 [Warning!!] user_id = asd
+INFO 2024-01-25 18:51:06,037 basehttp 14788 1692 "POST /todo/test HTTP/1.1" 200 112
+INFO 2024-01-25 18:51:06,181 views 14788 19420 Test API Start!!
+INFO 2024-01-25 18:51:06,182 views 14788 19420 input_value1 = 1
+INFO 2024-01-25 18:51:06,182 views 14788 19420 input_value2 = 2
+INFO 2024-01-25 18:51:06,182 views 14788 19420 input_value3 = 3
+INFO 2024-01-25 18:51:06,182 views 14788 19420 output_value1 = 12
+INFO 2024-01-25 18:51:06,182 views 14788 19420 output_value2 = 23
+INFO 2024-01-25 18:51:06,182 views 14788 19420 output_value3 = 31
+INFO 2024-01-25 18:51:06,182 views 14788 19420 Test API End!!
+ERROR 2024-01-25 18:51:06,182 views 14788 19420 Occured Error, user_id = asd
+WARNING 2024-01-25 18:51:06,182 views 14788 19420 [Warning!!] user_id = asd
+INFO 2024-01-25 18:51:06,183 basehttp 14788 19420 "POST /todo/test HTTP/1.1" 200 112
+INFO 2024-01-25 18:52:32,620 autoreload 14788 376 C:\Users\nsw32\vscode\AWS_Server_Practice\AWS_Server_Prac\settings.py changed, reloading.
+INFO 2024-01-25 18:52:33,222 autoreload 18900 10624 Watching for file changes with StatReloader

@@ -4,10 +4,52 @@ from rest_framework.response import Response
 from datetime import datetime
 from django.shortcuts import render
 from common.common import TodoView, SuccessResponse, SuccessResponseWithData, CommonResponse, ErrorResponse
+import logging
 
 # Create your views here.
 
 ################################## 실습 코드 ##################################
+logger = logging.getLogger('django') # 로그를 찍기 위한 변수
+
+# 테스팅을 위한 클래스
+class Test(TodoView):
+    def post(self, request):
+        ##########################################################
+        # 디버깅을 대체하여 어디까지 코드가 진행되는지 로그 남기기
+        logger.info("Test API Start!!") 
+
+        # 인풋 
+        input_value1 = request.data.get('input_value1')
+        input_value2 = request.data.get('input_value2')
+        input_value3 = request.data.get('input_value3')
+
+        # 인풋 로그 찍기
+        logger.info("input_value1 = " + input_value1)
+        logger.info("input_value2 = " + input_value2)
+        logger.info("input_value3 = " + input_value3)
+
+        # 아웃풋 
+        output_value1 = input_value1 + input_value2
+        output_value2 = input_value2 + input_value3
+        output_value3 = input_value3 + input_value1
+
+        # 아웃풋 로그 찍기
+        logger.info("output_value1 = " + output_value1)
+        logger.info("output_value2 = " + output_value2)
+        logger.info("output_value3 = " + output_value3)
+
+        logger.info("Test API End!!")
+        ##########################################################
+
+        # ./logs/log 파일에 로그 찍기 (파일 경로는 setting.py에 작성됨)
+        # level이 ERROR이므로 logger.warning()은 파일에 찍히지 않음
+        logger.error("Occured Error, user_id = " + self.user_id) 
+        logger.warning("[Warning!!] user_id = " + self.user_id)
+
+        return SuccessResponseWithData(data=dict(output_value1=output_value1,
+                                                output_value2=output_value2,
+                                                output_value3=output_value3))
+
 class TaskSelect(TodoView): # -> APIView를 상속하여 TaskSelect 클래스 생성
     def post(self, request):
 
