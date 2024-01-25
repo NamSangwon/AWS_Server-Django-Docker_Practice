@@ -216,4 +216,47 @@
    - `Access to XMLHttpRequest at 'http://localhost:8000/todo/select' from origin 'http://localhost:3001' has been blocked by CORS policy: Request header field version is not allowed by Access-Control-Allow-Headers in preflight response.` 에러 발생 &rightarrow; `setting.py`를 수정하여 오류 해결 [[수정 사항](https://github.com/NamSangwon/AWS_Server_Practice/commit/eb7a6a4a1a27bbeb42648b954ad1cac4634016af)]
    - 각 API의 출력을 공통 포맷으로 수정
 
- 
+---
+
+### 6. Django Log 찍기
+
+***로컬 환경에서만 프로그래밍을 진행할 수 없기 때문에 Log를 확인하는 것이 중요함*** <br>
+
+* Django에서 제공하는 Logging 사용하기
+  - `import logging`을 통해 사용
+  - `logger = logging.getLogger('django')`를 통해 로그를 찍기 위한 변수 생성
+  - `debug()`, `info()`, `warning()`, `error()`, `critical()`와 같은 함수들을 통해 로그를 찍음 (용도에 따라 다음 함수 중 하나를 사용 [ex. `error()`는 에러가 발생했을 시 사용])
+
+* 로그 포맷
+  - 로그 찍히는 포맷을 setting.py의 LOGGING에 아래와 같은 코드를 추가하여 정의 가능
+  - ```
+    'formatters': { # 로그 포맷 구성
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    }
+    ```
+  - handlers의 file내에 `'formatter':'verbose'`를 추가하여 정의한 포맷을 적용 (아래는 포맷이 적용된 로그 결과)
+  - ```
+    C:\Users\nsw32\vscode\AWS_Server_Practice\AWS_Server_Prac\settings.py changed, reloading.
+    INFO 2024-01-25 18:51:02,790 autoreload 14788 376 Watching for file changes with StatReloader
+    INFO 2024-01-25 18:51:05,891 views 14788 18292 Test API Start!!
+    INFO 2024-01-25 18:51:05,891 views 14788 18292 input_value1 = 1
+    INFO 2024-01-25 18:51:05,891 views 14788 18292 input_value2 = 2
+    INFO 2024-01-25 18:51:05,891 views 14788 18292 input_value3 = 3
+    INFO 2024-01-25 18:51:05,891 views 14788 18292 output_value1 = 12
+    INFO 2024-01-25 18:51:05,891 views 14788 18292 output_value2 = 23
+    INFO 2024-01-25 18:51:05,892 views 14788 18292 output_value3 = 31
+    INFO 2024-01-25 18:51:05,892 views 14788 18292 Test API End!!
+    ERROR 2024-01-25 18:51:05,892 views 14788 18292 Occured Error, user_id = asd
+    WARNING 2024-01-25 18:51:05,892 views 14788 18292 [Warning!!] user_id = asd
+    INFO 2024-01-25 18:51:05,892 basehttp 14788 18292 "POST /todo/test HTTP/1.1" 200 112
+    ```
+
+--- 
+
