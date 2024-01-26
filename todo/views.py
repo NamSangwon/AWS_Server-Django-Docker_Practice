@@ -5,6 +5,9 @@ from datetime import datetime
 from django.shortcuts import render
 from common.common import TodoView, SuccessResponse, SuccessResponseWithData, CommonResponse, ErrorResponse
 import logging
+from drf_yasg.utils import swagger_auto_schema
+from .serializer import TodoSerializer
+from drf_yasg import openapi
 
 # Create your views here.
 
@@ -105,6 +108,35 @@ class TaskSelect(TodoView): # -> APIView를 상속하여 TaskSelect 클래스 �
             return Response(status=200, data=dict(tasks=tasks_list, isLastPage=is_last_page))
     
 class TaskCreate(TodoView):
+    '''
+        여기에 주석을 쓰면 마크다운 형태로 swagger에 반영
+
+        # Todo 생성
+            - user_id : 사용자 ID
+            - name : Todo 명
+    '''
+    id_field = openapi.Schema(
+        'id',
+        description='To-Do가 생성되면 자동으로 채번되는 ID값',
+        type=openapi.TYPE_INTEGER
+    )
+
+    success_response = openapi.Schema(
+        title='response',
+        type=openapi.TYPE_OBJECT,
+        properties={
+            'id': id_field
+        }
+    )
+    @swagger_auto_schema(tags=['Todo 만들기'], 
+                         request_body=TodoSerializer, 
+                         query_serializer=TodoSerializer,
+                         responses={
+                             200 : success_response,
+                             404 : '찾을 수 없음',
+                             400 : '인풋 값 에러',
+                             500 : '서버 에러'
+                         })
     def post(self, request):
         
         # 이전 버전 (body 부에 user_id를 받아 오는 버전)

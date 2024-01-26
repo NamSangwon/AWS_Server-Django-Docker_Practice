@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'login',
     'todo',
     'common',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
