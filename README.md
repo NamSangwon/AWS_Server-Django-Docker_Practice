@@ -1,6 +1,6 @@
 # AWS_Server_Practice
  
-### 24/01/15 ~ 
+### 24/01/15 ~ 24/01/26
 
 #### :video_camera: [강의 유튜브](https://www.youtube.com/playlist?list=PLHQvFs5CMVoQMcglHmtPz9ShY058H3veh)    &    :page_facing_up: [강의 참고 블로그](https://cholol.tistory.com/482)
 
