@@ -290,3 +290,114 @@
     ```
     - 배치 프로그램은 보통 *특정 시간* 혹은 *특정 조건*에 작동 &rightarrow; 스케쥴러 역할로 제공하는 크론탭(in Linux) or Jenkins 사용
       * Jenkins는 배치 프로그램의 종료를 특정 조건으로 사용할 수 있기 때문에 더 유용하게 사용 가능
+
+---
+
+# 8. Amazon Aurora DB
+
+* AWS의 RDS를 통해 DB 생성 (상세한 설명은 [강의 블로그](https://cholol.tistory.com/538) 및 [강의 영상](https://www.youtube.com/watch?v=tJMSjUvDGss&list=PLHQvFs5CMVoQMcglHmtPz9ShY058H3veh&index=2) 참고)
+
+* Django와 AWS에서 생성한 DB 연결
+  - `mysqlclient` 사용 (아래는 MySQL DB 설정 코드)
+  - ```python
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST':  'database-1.cluster-cahfm1ikomik.ap-northeast-2.rds.amazonaws.com', # os.environ['MYSQL_HOST'] (환경 변수 사용) # AWS DB의 Writer Instance의 Endpoint name
+            'NAME': 'djangodb', # AWS DB 생성 시 설정한 데이터베이스 name
+            'USER': 'mychew', # os.environ['MYSQL_USER'] (환경 변수 사용)
+            'PASSWORD': 'cholol.tistory.com', # os.environ['MYSQL_PASSWORD'] (환경 변수 사용)
+            'PORT': '3306',
+            'OPTIONS': {'charset': 'utf8mb4'},
+        }
+    }
+    ```
+  - 위와 같이 USER와 PASSWORD를 설정으로 작성할 시
+    + 누군가 확인할 수 있는 위험 有 &rightarrow; **환경변수로 계정 정보 관리** (예로 위의 주석과 같이 작성)
+    
+* DB Tool을 통해 AWS DB 읽기
+  - 위의 MySQL DB 설정 코드와 똑같이 설정하여 DB Tool에 생성
+  - `javax.net.ssl.SSLHandshakeException: No appropriate protocol ...`과 같은 오류가 발생 시 `Enable TLSv1`을 클릭하여 해결
+  - 위를 완료하면 `python manage.py migrate`를 통해 Django에서 migrate AWS DB에 Django에서 제공하는 기본 테이블 생성
+ 
+* Parameter Group을 통해 Parameter를 설정하여 사용 가능
+
+---
+
+### 9. Swagger를 통해 API 문서화
+
+* `pip install drf-yasg`를 통해 Django에서 Swagger를 사용하기 위한 drf-yasg 라이브러리 설치
+  - `INSTALLED_APPS`에 'drf_yasg' 추가
+  - `./AWS_Server_Prac/urls.py`에 아래 코드 추가
+  - ```
+    from drf_yasg.views import get_schema_view
+    from drf_yasg import openapi
+    from rest_framework import permissions
+    
+    schema_view = get_schema_view(
+        openapi.Info(
+            title="TO-DO API",  # 타이틀
+            default_version='v1',   # 버전
+            description="서버개발자가 되는법 #12",   # 설명
+            terms_of_service="https://cholol.tistory.com/551",
+            contact=openapi.Contact(email="mychew@kakao.com")
+    ),
+        validators=['flex'],
+        public=True,
+        permission_classes=(permissions.AllowAny,)
+    )
+
+    urlpatterns = [
+        # swagger
+        path(r'swagger(?P<format>\.json|\.yaml)', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+        path(r'swagger', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+        path(r'redoc', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc-v1'),
+        # django
+        ...
+    ]
+    ```
+  - ![image](https://github.com/NamSangwon/AWS_Server_Practice/assets/127469500/5784551e-ce86-4274-8e26-f8ab9e09a17b)
+
+* swagger에 API 정보를 노출시키기
+  - `from drf_yasg.utils import swagger_auto_schema`
+  -  [INPUT INFO] `@swagger_auto_schema((parameters...))`를 통해 swagger에 API 정보를 노출시키기 위해 annotation(@) 추가 해주기
+    + ```
+      @swagger_auto_schema(tags=['Todo 만들기'], 
+                           request_body=TodoSerializer, 
+                           query_serializer=TodoSerializer,
+                           responses={
+                               200 : '성공',
+                               404 : '찾을 수 없음',
+                               400 : '인풋 값 에러',
+                               500 : '서버 에러'
+                           })
+      ``` 
+    + ![image](https://github.com/NamSangwon/AWS_Server_Practice/assets/127469500/d24d0e1b-dc70-4844-b9b8-4283fae1e061)
+  - [OUTPUT INFO] openapi.schema()를 통해 status=200 일 때의 OUTPUT 값 정보 출력
+    + ```
+      from drf_yasg import openapi
+      
+      id_field = openapi.Schema(
+           'id',
+           description='To-Do가 생성되면 자동으로 채번되는 ID값',
+           type=openapi.TYPE_INTEGER
+       )
+   
+       success_response = openapi.Schema(
+           title='response',
+           type=openapi.TYPE_OBJECT,
+           properties={
+               'id': id_field
+           }
+       )
+
+      @swagger_auto_schema(...,
+                           responses={
+                               200 : success_response,
+                               ...
+                           })
+      ```
+    + ![image](https://github.com/NamSangwon/AWS_Server_Practice/assets/127469500/c3149fdb-3034-41a9-a0a1-60c6decc2435)
+   
+  - 주석으로 마크다운 형태로 swagger에 반영됨
+    + ![image](https://github.com/NamSangwon/AWS_Server_Practice/assets/127469500/1a04b154-c883-472d-bf0b-240c75f5637d)
